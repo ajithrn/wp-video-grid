@@ -1,0 +1,161 @@
+/**
+ * WP Video Grid - Frontend Styles
+ * 
+ * This stylesheet contains styles for the frontend display of the WP Video Grid plugin.
+ *
+ * @package WP_Video_Grid
+ * @version 1.0.0
+ */
+
+/* Grid layout */
+.wp-video-grid {
+  display: grid;
+  gap: 20px;
+}
+
+.wp-video-grid-item {
+  width: 100%;
+}
+
+/* Video container */
+.wp-video-grid-item-inner {
+  position: relative;
+  padding-bottom: 56.25%; /* 16:9 aspect ratio */
+  height: 0;
+  overflow: hidden;
+  max-width: 100%;
+}
+
+/* Embedded video styling */
+.thumbnail-container iframe,
+.thumbnail-container object,
+.thumbnail-container embed {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/* Thumbnail image */
+.wp-video-grid-item img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Play button */
+.play-button {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 60px;
+  height: 60px;
+  background-color: rgba(0, 0, 0, 0.7);
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  z-index: 99;
+}
+
+.play-button::before {
+  content: '';
+  width: 0;
+  height: 0;
+  border-top: 15px solid transparent;
+  border-bottom: 15px solid transparent;
+  border-left: 20px solid white;
+  margin-left: 5px;
+}
+
+.play-button:hover {
+  background-color: rgba(0, 0, 0, 0.9);
+  transform: translate(-50%, -50%) scale(1.1);
+}
+
+/* Popup styles */
+.wp-video-grid-popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.wp-video-grid-popup.active {
+  opacity: 1;
+}
+
+.wp-video-grid-popup-inner {
+  position: relative;
+  width: 80%;
+  max-width: 900px;
+  aspect-ratio: 16 / 9;
+}
+
+.close-popup {
+  position: absolute;
+  top: -40px;
+  right: 0;
+  width: 30px;
+  height: 30px;
+  background-color: #ffffff;
+  padding: 0;
+  border: none;
+  cursor: pointer;
+  color: #000000;
+  font-size: 24px;
+  line-height: 1em;
+}
+
+.close-popup:hover {
+  background-color: #ff0051;
+  color: #ffffff;
+}
+
+/* Loading spinner */
+.loading-spinner {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 40px;
+  height: 40px;
+  border: 3px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  border-top-color: #fff;
+  animation: spin 1s ease-in-out infinite;
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+}
+
+@keyframes spin {
+  to { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+/* Loading state styles */
+.wp-video-grid-item.loading .thumbnail-container {
+  opacity: 0.5;
+}
+
+.wp-video-grid-item.loading .play-button {
+  opacity: 0;
+}
+
+.wp-video-grid-item.loading .loading-spinner {
+  opacity: 1;
+}

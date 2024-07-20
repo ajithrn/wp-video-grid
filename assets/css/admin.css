@@ -1,0 +1,53 @@
+/**
+ * WP Video Grid - Admin Styles
+ * 
+ * This stylesheet contains styles for the admin interface of the WP Video Grid plugin.
+ *
+ * @package WP_Video_Grid
+ * @version 1.0.0
+ */
+
+/* Meta box styles */
+.wp-video-grid-metabox {
+  margin-top: 20px;
+}
+
+.wp-video-grid-metabox label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+.wp-video-grid-metabox input[type="text"],
+.wp-video-grid-metabox select {
+  width: 100%;
+  max-width: 400px;
+  margin-bottom: 10px;
+}
+
+.wp-video-grid-metabox #thumbnail_preview {
+  max-width: 250px;
+  height: auto;
+  margin-top: 10px;
+}
+
+/* Description text */
+.wp-video-grid-metabox .description {
+  font-style: italic;
+  color: #666;
+  margin-top: 5px;
+}
+
+/* Embed preview container */
+.wp-video-grid-metabox #embed_preview_container {
+  margin-top: 15px;
+}
+
+.wp-video-grid-metabox #embed_preview_container iframe {
+  max-width: 100%;
+}
+
+/* Button styling */
+.wp-video-grid-metabox .button {
+  margin-top: 5px;
+}
