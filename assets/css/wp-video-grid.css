@@ -4,13 +4,14 @@
  * This stylesheet contains styles for the frontend display of the WP Video Grid plugin.
  *
  * @package WP_Video_Grid
- * @version 1.0.0
+ * @version 1.1.1
  */
 
 /* Grid layout */
 .wp-video-grid {
   display: grid;
   gap: 20px;
+  margin: 20px 0;
 }
 
 .wp-video-grid-item {
@@ -24,6 +25,35 @@
   height: 0;
   overflow: hidden;
   max-width: 100%;
+}
+
+.wp-video-grid-empty {
+  background-color: #f8f8f8;
+  border: 1px solid #ddd;
+  padding: 20px;
+}
+
+.wp-video-grid-empty h4 {
+  margin-bottom: 10px;
+  font-size: 22px;
+  color: #fb193f;
+}
+
+.wp-video-grid-empty p,
+.wp-video-grid-empty ul {
+  text-align: left;
+  font-size: 14px;
+  color: #4e4e4e;
+}
+
+.wp-video-grid-empty a {
+  color: #0073aa;
+  text-decoration: none;
+}
+
+.wp-video-grid-empty a:hover {
+  color: #00a0d2;
+  text-decoration: underline;
 }
 
 /* Embedded video styling */
