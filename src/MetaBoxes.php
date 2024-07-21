@@ -3,7 +3,7 @@
  * WP Video Grid - Meta Boxes
  *
  * @package WP_Video_Grid
- * @version 1.0.0
+ * @version 1.1.0
  */
 
 namespace WP_Video_Grid;
@@ -144,6 +144,7 @@ class MetaBoxes {
             <label for="custom_thumbnail"><?php _e( 'Custom Thumbnail', 'wp-video-grid' ); ?></label>
             <input type="hidden" id="custom_thumbnail" name="custom_thumbnail" value="<?php echo esc_attr( $custom_thumbnail ); ?>" />
             <button type="button" id="upload_thumbnail_button" class="button"><?php _e( 'Upload Thumbnail', 'wp-video-grid' ); ?></button>
+            <button type="button" id="remove_thumbnail_button" class="button" <?php echo empty($custom_thumbnail) ? 'style="display:none;"' : ''; ?>><?php _e( 'Remove Thumbnail', 'wp-video-grid' ); ?></button>
             <br>
             <i><?php _e( 'Upload a custom thumbnail image. If not provided, the plugin will attempt to use an auto-generated thumbnail for external videos.', 'wp-video-grid' ); ?></i>
         </p>
@@ -151,7 +152,7 @@ class MetaBoxes {
         <div id="thumbnail_preview_container">
             <?php
             if ( $custom_thumbnail ) {
-                echo wp_get_attachment_image( $custom_thumbnail, 'full', false, array( 'id' => 'thumbnail_preview' ) );
+                echo wp_get_attachment_image( $custom_thumbnail, 'thumbnail', false, array( 'id' => 'thumbnail_preview' ) );
             } elseif ( $auto_thumbnail ) {
                 echo '<img src="' . esc_url( $auto_thumbnail ) . '" id="thumbnail_preview" />';
             }
@@ -198,6 +199,8 @@ class MetaBoxes {
             if ( isset( $_POST[ltrim($key, '_')] ) ) {
                 $value = call_user_func( $sanitize_callback, $_POST[ltrim($key, '_')] );
                 update_post_meta( $post_id, $key, $value );
+            } elseif ( $key === '_custom_thumbnail' ) {
+                delete_post_meta( $post_id, $key );
             }
         }
 

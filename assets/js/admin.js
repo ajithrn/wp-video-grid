@@ -5,7 +5,7 @@
  * including video upload, thumbnail selection, and embed checking.
  *
  * @package WP_Video_Grid
- * @version 1.0.0
+ * @version 1.1.0
  */
 
 (function($) {
@@ -61,7 +61,16 @@
               } else {
                   $('#thumbnail_preview_container').html('<img src="' + attachment.url + '" id="thumbnail_preview" />');
               }
+              $('#remove_thumbnail_button').show();
           }).open();
+      });
+
+      // Remove custom thumbnail
+      $('#remove_thumbnail_button').on('click', function(e) {
+          e.preventDefault();
+          $('#custom_thumbnail').val('');
+          $('#thumbnail_preview_container').empty();
+          $(this).hide();
       });
 
       // Check embed functionality

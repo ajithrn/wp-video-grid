@@ -12,3 +12,18 @@
 - Lazy loading of video thumbnails
 - Popup or inline video playback
 - Responsive design
+
+## [1.1.0] - 2024-07-22
+
+### Added
+- Option to remove custom thumbnail from the backend
+- "Remove Thumbnail" button in the video edit screen
+- Functionality to clear custom thumbnail data when removed
+
+### Changed
+- Updated MetaBoxes.php to include remove thumbnail option
+- Modified admin.js to handle custom thumbnail removal
+- Improved save_meta_boxes method to properly handle thumbnail removal
+
+### Documentation
+- Added system requirements to README

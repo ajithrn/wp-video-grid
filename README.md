@@ -15,6 +15,14 @@ WordPress Video Grid is a WordPress plugin that allows you to create and manage 
 - Popup or inline video playback
 - Responsive design
 
+
+## Requirements
+
+- WordPress 5.0+
+- PHP 7.0+
+- Modern web browser
+
+
 ## Installation
 
 1. Upload the `wp-video-grid` folder to the `/wp-content/plugins/` directory
