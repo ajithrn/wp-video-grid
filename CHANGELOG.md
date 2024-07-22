@@ -1,5 +1,16 @@
 # Changelog
 
+## [1.2.0] - 2024-07-24
+
+### Added
+- New settings page to manage plugin data deletion preference
+- Option to keep or delete plugin data upon uninstallation
+- "Settings" link in the plugin's action links on the plugins listing page
+
+### Changed
+- Uninstall process now respects user preference for data deletion
+- Default setting for data deletion is now 'keep data' (unchecked)
+
 ## [1.1.1] - 2024-07-23'
 
 ### Added

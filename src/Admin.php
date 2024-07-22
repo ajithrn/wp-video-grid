@@ -5,7 +5,7 @@
  * This file handles the admin-specific functionality of the plugin.
  *
  * @package WP_Video_Grid
- * @version 1.0.0
+ * @version 1.2.0
  */
 
 namespace WP_Video_Grid;
@@ -24,6 +24,7 @@ class Admin {
      */
     public function __construct() {
         add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_admin_scripts' ) );
+        add_filter( 'plugin_action_links_' . plugin_basename( WP_VIDEO_GRID_PLUGIN_DIR . 'wp-video-grid.php' ), array( $this, 'add_settings_link' ) );
     }
 
     /**
@@ -65,5 +66,17 @@ class Admin {
 
         // Enqueue WordPress media scripts.
         wp_enqueue_media();
+    }
+
+    /**
+     * Add settings link to plugin action links
+     *
+     * @param array $links Existing plugin action links
+     * @return array Modified plugin action links
+     */
+    public function add_settings_link( $links ) {
+      $settings_link = '<a href="' . admin_url( 'options-general.php?page=wp-video-grid-settings' ) . '">' . __( 'Settings', 'wp-video-grid' ) . '</a>';
+      array_unshift( $links, $settings_link );
+      return $links;
     }
 }
