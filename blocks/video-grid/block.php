@@ -6,7 +6,7 @@
  * @version 1.1.1
  */
 
-namespace WP_Video_Grid;
+namespace WP_Video_Grid\Blocks;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -14,7 +14,7 @@ defined( 'ABSPATH' ) || exit;
  * Class Block
  * Handles the Gutenberg block functionality
  */
-class Block {
+class Video_Grid_Block {
     /**
      * Constructor
      */
@@ -86,19 +86,19 @@ class Block {
      * Enqueue block editor assets
      */
     public function enqueue_block_editor_assets() {
-        wp_enqueue_script(
-            'wp-video-grid-editor',
-            WP_VIDEO_GRID_PLUGIN_URL . 'assets/js/block-editor.js',
-            array( 'wp-blocks', 'wp-element', 'wp-components', 'wp-editor' ),
-            filemtime( WP_VIDEO_GRID_PLUGIN_DIR . 'assets/js/block-editor.js' )
-        );
+      wp_enqueue_script(
+          'wp-video-grid-editor',
+          WP_VIDEO_GRID_PLUGIN_URL . 'blocks/video-grid/block-editor.js',
+          array( 'wp-blocks', 'wp-element', 'wp-components', 'wp-editor' ),
+          filemtime( WP_VIDEO_GRID_PLUGIN_DIR . 'blocks/video-grid/block-editor.js' )
+      );
 
-        wp_enqueue_style(
-            'wp-video-grid-editor',
-            WP_VIDEO_GRID_PLUGIN_URL . 'assets/css/wp-video-grid.css',
-            array(),
-            filemtime( WP_VIDEO_GRID_PLUGIN_DIR . 'assets/css/wp-video-grid.css' )
-        );
+      wp_enqueue_style(
+          'wp-video-grid-editor',
+          WP_VIDEO_GRID_PLUGIN_URL . 'assets/css/wp-video-grid.css',
+          array(),
+          filemtime( WP_VIDEO_GRID_PLUGIN_DIR . 'assets/css/wp-video-grid.css' )
+      );
 
         wp_localize_script( 'wp-video-grid-editor', 'wpVideoGridData', array(
             'categories' => $this->get_video_categories(),

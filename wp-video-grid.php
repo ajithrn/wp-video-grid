@@ -3,7 +3,7 @@
  * Plugin Name: WordPress Video Grid
  * Plugin URI: https://ajithrn.com/wp-video-grid
  * Description: Plugin to manage and display videos in grid
- * Version: 1.2.0
+ * Version: 1.3.0
  * Author: Ajith
  * Author URI: https://ajithrn.com
  * License: GPL-2.0+
@@ -18,7 +18,7 @@ if ( ! defined( 'WPINC' ) ) {
 }
 
 // Define plugin constants
-define( 'WP_VIDEO_GRID_VERSION', '1.2.0' );
+define( 'WP_VIDEO_GRID_VERSION', '1.3.0' );
 define( 'WP_VIDEO_GRID_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
 define( 'WP_VIDEO_GRID_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
 
@@ -26,11 +26,11 @@ define( 'WP_VIDEO_GRID_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
 require_once WP_VIDEO_GRID_PLUGIN_DIR . 'src/PostType.php';
 require_once WP_VIDEO_GRID_PLUGIN_DIR . 'src/Taxonomy.php';
 require_once WP_VIDEO_GRID_PLUGIN_DIR . 'src/MetaBoxes.php';
-require_once WP_VIDEO_GRID_PLUGIN_DIR . 'src/Block.php';
 require_once WP_VIDEO_GRID_PLUGIN_DIR . 'src/Frontend.php';
 require_once WP_VIDEO_GRID_PLUGIN_DIR . 'src/Admin.php';
 require_once WP_VIDEO_GRID_PLUGIN_DIR . 'src/Ajax.php';
 require_once WP_VIDEO_GRID_PLUGIN_DIR . 'src/Settings.php';
+require_once WP_VIDEO_GRID_PLUGIN_DIR . 'blocks/video-grid/block.php';
 
 /**
  * Initialize the plugin
@@ -39,11 +39,11 @@ function wp_video_grid_init() {
     new WP_Video_Grid\PostType();
     new WP_Video_Grid\Taxonomy();
     new WP_Video_Grid\MetaBoxes();
-    new WP_Video_Grid\Block();
     new WP_Video_Grid\Frontend();
     new WP_Video_Grid\Admin();
     new WP_Video_Grid\Ajax();
     new WP_Video_Grid\Settings();
+    new WP_Video_Grid\Blocks\Video_Grid_Block();
 }
 add_action( 'plugins_loaded', 'wp_video_grid_init' );
 

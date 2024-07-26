@@ -1,5 +1,16 @@
 # Changelog
 
+## [1.3.0] - 2024-07-27
+
+### Changed
+- Restructured the plugin to improve organization and maintainability
+- Moved block-related code to a dedicated 'blocks/video-grid' directory
+- Consolidated block-specific styles into the main CSS file
+
+### Improved
+- Enhanced code organization for better future maintenance
+
+
 ## [1.2.0] - 2024-07-24
 
 ### Added
