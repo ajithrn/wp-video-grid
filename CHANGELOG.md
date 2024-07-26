@@ -1,5 +1,20 @@
 # Changelog
 
+## [1.5.0] - 2024-07-27
+
+### Added
+- New `render_video_item` function in the Frontend class for centralized video item rendering
+- Added .gitignore file
+
+### Changed
+- Refactored Video Grid Block to use the new `render_video_item` function
+- Updated Single Video Block to utilize the `render_video_item` function
+- Improved code reusability and consistency in video item rendering across the plugin
+
+### Improved
+- Centralized video item rendering logic for easier maintenance and updates
+
+
 ## [1.4.0] - 2024-07-27
 
 ### Added

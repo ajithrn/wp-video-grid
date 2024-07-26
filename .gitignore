@@ -1,0 +1,76 @@
+# Operating System Files
+.DS_Store
+Thumbs.db
+
+# IDE/Editor Folders
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# Node.js (if you're using npm for build processes)
+node_modules/
+npm-debug.log
+yarn-error.log
+
+# Compiled/Minified Assets
+*.min.js
+*.min.css
+
+# Composer (if you're using it for PHP dependencies)
+vendor/
+composer.lock
+
+# WordPress Core (in case the plugin folder is outside wp-content)
+wp-admin/
+wp-includes/
+wp-*.php
+xmlrpc.php
+index.php
+license.txt
+readme.html
+
+# WordPress Content (exclude everything except your plugin)
+wp-content/*
+!wp-content/plugins/
+wp-content/plugins/*
+!wp-content/plugins/your-plugin-folder/
+
+# Plugin specific ignores
+your-plugin-folder/node_modules/
+your-plugin-folder/vendor/
+your-plugin-folder/.sass-cache/
+your-plugin-folder/dist/
+
+# Temporary and Cache files
+*.log
+*.tmp
+*.temp
+*.cache
+
+# Backup files
+*.bak
+*.swp
+*~
+
+# Security related
+*.pem
+*.key
+*.crt
+
+# Environment specific files
+.env
+wp-config.php
+
+# Build process artifacts (if applicable)
+build/
+dist/
+
+# Testing related (if you're using PHPUnit or similar)
+phpunit.xml
+tests/coverage/
+
+# Documentation (if generated)
+docs/
+
+# Any other project-specific files or directories to ignore

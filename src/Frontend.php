@@ -3,7 +3,7 @@
  * WP Video Grid - Frontend
  *
  * @package WP_Video_Grid
- * @version 1.0.0
+ * @version 1.5.0
  */
 
 namespace WP_Video_Grid;
@@ -66,5 +66,36 @@ class Frontend {
         } else {
             wp_send_json_error( array( 'message' => __( 'Unable to generate embed for this URL', 'wp-video-grid' ) ) );
         }
+    }
+
+    /**
+     * Render a single video item
+     *
+     * @param WP_Post $video The video post object.
+     * @param string  $video_source The video source URL.
+     * @param string  $thumbnail The thumbnail URL.
+     * @param string  $display_type The display type (inline or popup).
+     * @param string  $video_type The video type (external or self-hosted).
+     * @return string The HTML for the video item.
+     */
+    public static function render_video_item( $video, $video_source, $thumbnail, $display_type, $video_type ) {
+        ob_start();
+        ?>
+        <div class="wp-video-grid-item" 
+            data-video-url="<?php echo esc_url( $video_source ); ?>" 
+            data-display-type="<?php echo esc_attr( $display_type ); ?>" 
+            data-video-type="<?php echo esc_attr( $video_type ); ?>">
+            <div class="wp-video-grid-item-inner">
+                <div class="thumbnail-container">
+                    <img src="<?php echo esc_url( $thumbnail ); ?>" 
+                        alt="<?php echo esc_attr( $video->post_title ); ?>" 
+                        class="video-thumbnail">
+                    <div class="play-button"></div>
+                    <div class="loading-spinner"></div>
+                </div>
+            </div>
+        </div>
+        <?php
+        return ob_get_clean();
     }
 }

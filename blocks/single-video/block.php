@@ -3,7 +3,7 @@
  * WP Video Grid - Single Video Block
  *
  * @package WP_Video_Grid
- * @version 1.4.0
+ * @version 1.5.0
  */
 
 namespace WP_Video_Grid\Blocks;
@@ -94,7 +94,7 @@ class Single_Video_Block {
      * @param array $attributes Block attributes.
      * @return string Rendered block HTML.
      */
-      public function render_block( $attributes ) {
+    public function render_block( $attributes ) {
         $video_id = isset( $attributes['videoId'] ) ? intval( $attributes['videoId'] ) : 0;
         $display_type = isset( $attributes['displayType'] ) ? sanitize_text_field( $attributes['displayType'] ) : 'inline';
 
@@ -112,24 +112,23 @@ class Single_Video_Block {
         $video_url = get_post_meta( $video_id, '_video_url', true );
         $video_file = get_post_meta( $video_id, '_video_file', true );
         
-        $thumbnail = $this->get_video_thumbnail( array( 'id' => $video_id ) );
+        $custom_thumbnail = get_post_meta( $video_id, '_custom_thumbnail', true );
+        $auto_thumbnail = get_post_meta( $video_id, '_auto_thumbnail', true );
+        
+        $thumbnail = $custom_thumbnail ? wp_get_attachment_image_url( $custom_thumbnail, 'medium' ) : $auto_thumbnail;
+        
+        if ( ! $thumbnail ) {
+            $thumbnail = WP_VIDEO_GRID_PLUGIN_URL . 'assets/images/default-video-thumbnail.jpg';
+        }
+        
         $video_source = $video_type === 'external' ? $video_url : $video_file;
 
-        ob_start();
-        ?>
-        <div class="wp-video-grid-item" data-video-url="<?php echo esc_url( $video_source ); ?>" data-display-type="<?php echo esc_attr( $display_type ); ?>" data-video-type="<?php echo esc_attr( $video_type ); ?>">
-            <div class="wp-video-grid-item-inner">
-                <div class="thumbnail-container">
-                    <img src="<?php echo esc_url( $thumbnail ); ?>" alt="<?php echo esc_attr( $video->post_title ); ?>" class="video-thumbnail">
-                    <div class="play-button"></div>
-                    <div class="loading-spinner"></div>
-                </div>
-            </div>
-        </div>
-        <?php
-        return ob_get_clean();
+        return \WP_Video_Grid\Frontend::render_video_item(
+            $video,
+            $video_source,
+            $thumbnail,
+            $display_type,
+            $video_type
+        );
     }
 }
-
-new Single_Video_Block();
-

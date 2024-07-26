@@ -3,7 +3,7 @@
  * WP Video Grid - Gutenberg Block
  *
  * @package WP_Video_Grid
- * @version 1.1.1
+ * @version 1.5.0
  */
 
 namespace WP_Video_Grid\Blocks;
@@ -86,19 +86,19 @@ class Video_Grid_Block {
      * Enqueue block editor assets
      */
     public function enqueue_block_editor_assets() {
-      wp_enqueue_script(
-          'wp-video-grid-editor',
-          WP_VIDEO_GRID_PLUGIN_URL . 'blocks/video-grid/block-editor.js',
-          array( 'wp-blocks', 'wp-element', 'wp-components', 'wp-editor' ),
-          filemtime( WP_VIDEO_GRID_PLUGIN_DIR . 'blocks/video-grid/block-editor.js' )
-      );
+        wp_enqueue_script(
+            'wp-video-grid-editor',
+            WP_VIDEO_GRID_PLUGIN_URL . 'blocks/video-grid/block-editor.js',
+            array( 'wp-blocks', 'wp-element', 'wp-components', 'wp-editor' ),
+            filemtime( WP_VIDEO_GRID_PLUGIN_DIR . 'blocks/video-grid/block-editor.js' )
+        );
 
-      wp_enqueue_style(
-          'wp-video-grid-editor',
-          WP_VIDEO_GRID_PLUGIN_URL . 'assets/css/wp-video-grid.css',
-          array(),
-          filemtime( WP_VIDEO_GRID_PLUGIN_DIR . 'assets/css/wp-video-grid.css' )
-      );
+        wp_enqueue_style(
+            'wp-video-grid-editor',
+            WP_VIDEO_GRID_PLUGIN_URL . 'assets/css/wp-video-grid.css',
+            array(),
+            filemtime( WP_VIDEO_GRID_PLUGIN_DIR . 'assets/css/wp-video-grid.css' )
+        );
 
         wp_localize_script( 'wp-video-grid-editor', 'wpVideoGridData', array(
             'categories' => $this->get_video_categories(),
@@ -164,51 +164,57 @@ class Video_Grid_Block {
         ob_start();
 
         if ( empty( $videos ) ) {
-          $add_new_link = admin_url( 'post-new.php?post_type=wp-video-grid' );
-          $manage_categories_link = admin_url( 'edit-tags.php?taxonomy=wp-video-grid-category&post_type=wp-video-grid' );
-          ?>
-            <div class="wp-video-grid-empty">
-                <h4><?php _e( 'No videos found.', 'wp-video-grid' ); ?></h4>
-                <p><?php _e( 'To display videos:', 'wp-video-grid' ); ?></p>
-                <ul>
-                    <li><?php printf( __( '<a href="%s">Add new videos</a> using the WP Video Grid post type.', 'wp-video-grid' ), esc_url( $add_new_link ) ); ?></li>
-                    <li><?php printf( __( '<a href="%s">Manage categories</a> and make sure you have selected the correct category (if applicable).', 'wp-video-grid' ), esc_url( $manage_categories_link ) ); ?></li>
-                    <li><?php _e( 'Verify that your videos are published and not in draft status.', 'wp-video-grid' ); ?></li>
-                </ul>
-            </div>
-            <?php
+            $this->render_empty_state();
         } else {
             ?>
             <div class="wp-video-grid" style="display: grid; grid-template-columns: repeat(<?php echo esc_attr( $videos_per_grid ); ?>, 1fr); gap: 20px;">
-                <?php foreach ( $videos as $video ) : ?>
-                    <?php
+                <?php
+                foreach ( $videos as $video ) {
                     $video_type = get_post_meta( $video->ID, '_video_type', true );
                     $video_url = get_post_meta( $video->ID, '_video_url', true );
                     $video_file = get_post_meta( $video->ID, '_video_file', true );
                     $custom_thumbnail = get_post_meta( $video->ID, '_custom_thumbnail', true );
                     $auto_thumbnail = get_post_meta( $video->ID, '_auto_thumbnail', true );
-                    
+
                     $thumbnail = $custom_thumbnail ? wp_get_attachment_image_url( $custom_thumbnail, 'medium' ) : $auto_thumbnail;
-                    
+
                     if ( ! $thumbnail ) {
                         $thumbnail = WP_VIDEO_GRID_PLUGIN_URL . 'assets/images/default-video-thumbnail.jpg';
                     }
-                    
+
                     $video_source = $video_type === 'external' ? $video_url : $video_file;
-                    ?>
-                    <div class="wp-video-grid-item" data-video-url="<?php echo esc_url( $video_source ); ?>" data-display-type="<?php echo esc_attr( $display_type ); ?>" data-video-type="<?php echo esc_attr( $video_type ); ?>">
-                        <div class="wp-video-grid-item-inner">
-                            <div class="thumbnail-container">
-                                <img src="<?php echo esc_url( $thumbnail ); ?>" alt="<?php echo esc_attr( $video->post_title ); ?>" class="video-thumbnail">
-                                <div class="play-button"></div>
-                                <div class="loading-spinner"></div>
-                            </div>
-                        </div>
-                    </div>
-                <?php endforeach; ?>
+
+                    echo \WP_Video_Grid\Frontend::render_video_item(
+                        $video,
+                        $video_source,
+                        $thumbnail,
+                        $display_type,
+                        $video_type
+                    );
+                }
+                ?>
             </div>
             <?php
         }
         return ob_get_clean();
+    }
+
+    /**
+     * Render empty state message
+     */
+    private function render_empty_state() {
+        $add_new_link = admin_url( 'post-new.php?post_type=wp-video-grid' );
+        $manage_categories_link = admin_url( 'edit-tags.php?taxonomy=wp-video-grid-category&post_type=wp-video-grid' );
+        ?>
+        <div class="wp-video-grid-empty">
+            <h4><?php _e( 'No videos found.', 'wp-video-grid' ); ?></h4>
+            <p><?php _e( 'To display videos:', 'wp-video-grid' ); ?></p>
+            <ul>
+                <li><?php printf( __( '<a href="%s">Add new videos</a> using the WP Video Grid post type.', 'wp-video-grid' ), esc_url( $add_new_link ) ); ?></li>
+                <li><?php printf( __( '<a href="%s">Manage categories</a> and make sure you have selected the correct category (if applicable).', 'wp-video-grid' ), esc_url( $manage_categories_link ) ); ?></li>
+                <li><?php _e( 'Verify that your videos are published and not in draft status.', 'wp-video-grid' ); ?></li>
+            </ul>
+        </div>
+        <?php
     }
 }

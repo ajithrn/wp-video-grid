@@ -3,7 +3,7 @@
  * Plugin Name: WordPress Video Grid
  * Plugin URI: https://ajithrn.com/wp-video-grid
  * Description: Plugin to manage and display videos in grid
- * Version: 1.4.0
+ * Version: 1.5.0
  * Author: Ajith
  * Author URI: https://ajithrn.com
  * License: GPL-2.0+
@@ -18,7 +18,7 @@ if ( ! defined( 'WPINC' ) ) {
 }
 
 // Define plugin constants
-define( 'WP_VIDEO_GRID_VERSION', '1.4.0' );
+define( 'WP_VIDEO_GRID_VERSION', '1.5.0' );
 define( 'WP_VIDEO_GRID_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
 define( 'WP_VIDEO_GRID_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
 
