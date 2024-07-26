@@ -1,5 +1,24 @@
 # Changelog
 
+## [1.4.0] - 2024-07-27
+
+### Added
+- New "WP Video Grid Single Video" block for selecting and displaying individual videos
+- Dropdown with search functionality for video selection in the Single Video block
+- Option to choose between inline and popup display for single video block
+
+### Changed
+- Removed featured image support from the custom post type
+- Reused thumbnail logic from video grid block for consistency
+
+### Fixed
+- Fixed REST API route issues for the custom post type
+
+### Improved
+- Enhanced code organization and reusability
+- Optimized video loading in the editor for faster performance
+
+
 ## [1.3.0] - 2024-07-27
 
 ### Changed

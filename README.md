@@ -2,26 +2,27 @@
 
 ## Description
 
-WordPress Video Grid is a WordPress plugin that allows you to create and manage video grids on your WordPress website. It supports both self-hosted videos and external videos from platforms like YouTube and Vimeo.
+WordPress Video Grid is a WordPress plugin that allows you to create and manage video grids on your WordPress website. It supports both self-hosted videos and external videos from platforms like YouTube and Vimeo. The plugin now includes two main blocks: Video Grid and Single Video.
 
 ## Features
 
 - Custom post type for video management
 - Support for self-hosted videos and external videos (YouTube, Vimeo)
 - Custom taxonomy for video categorization
-- Gutenberg block for easy grid creation
+- Two Gutenberg blocks:
+  1. Video Grid: for creating customizable video grids
+  2. Single Video: for embedding individual videos with display options
 - Customizable grid layout
+- Searchable dropdown for easy video selection
+- Option for inline or popup video playback
 - Lazy loading of video thumbnails
-- Popup or inline video playback
 - Responsive design
-
 
 ## Requirements
 
 - WordPress 5.0+
 - PHP 7.0+
 - Modern web browser
-
 
 ## Installation
 
@@ -53,6 +54,14 @@ WordPress Video Grid is a WordPress plugin that allows you to create and manage 
    - Display Type: Choose between inline or popup playback
 4. Publish or update your post/page
 
+### Embedding a Single Video
+
+1. Create a new post or page
+2. Add the 'WP Video Grid: Single Video' block
+3. Use the searchable dropdown to select a video
+4. Choose the display type (inline or popup)
+5. Publish or update your post/page
+
 ## Frequently Asked Questions
 
 **Q: What video formats are supported for self-hosted videos?**
@@ -60,6 +69,9 @@ A: The plugin supports all video formats that are natively supported by WordPres
 
 **Q: Can I use videos from other platforms besides YouTube and Vimeo?**
 A: The plugin currently supports YouTube and Vimeo. Support for other platforms may be added in future updates.
+
+**Q: How do I customize the appearance of the video grid or single video?**
+A: You can use custom CSS to style the video grid and single video blocks. The plugin provides CSS classes that you can target for customization.
 
 ## Changelog
 
@@ -72,4 +84,3 @@ For support, please create an issue in the plugin's GitHub repository or contact
 ## License
 
 This plugin is licensed under the GPL v2 or later.
-

@@ -65,8 +65,11 @@ class PostType {
             'has_archive'        => true,
             'hierarchical'       => false,
             'menu_position'      => null,
-            'supports'           => array( 'title', 'editor', 'thumbnail' ),
+            'supports'           => array( 'title', 'editor', ),
             'menu_icon'          => 'dashicons-format-video',
+            'show_in_rest'       => true,
+            'rest_base'          => 'wp-video-grid',
+            'rest_controller_class' => 'WP_REST_Posts_Controller',
         );
 
         register_post_type( 'wp-video-grid', $args );

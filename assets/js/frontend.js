@@ -5,7 +5,7 @@
  * including video playback, popup handling, and lazy loading of thumbnails.
  *
  * @package WP_Video_Grid
- * @version 1.0.0
+ * @version 1.4.0
  */
 
 (function($) {
@@ -85,7 +85,7 @@
                               console.error('Autoplay failed:', error);
                           });
                       }
-                  }, 500);
+                  }, 2000);
               } else if (displayType === 'popup') {
                   showPopup($embed);
               }
