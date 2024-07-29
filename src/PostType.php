@@ -3,7 +3,7 @@
  * WP Video Grid - Custom Post Type
  *
  * @package WP_Video_Grid
- * @version 1.0.0
+ * @version 1.5.1
  */
 
 namespace WP_Video_Grid;
@@ -20,6 +20,7 @@ class PostType {
      */
     public function __construct() {
         add_action( 'init', array( $this, 'register_post_type' ) );
+        add_filter( 'use_block_editor_for_post_type', array( $this, 'disable_gutenberg' ), 10, 2 );
     }
 
     /**
@@ -28,9 +29,9 @@ class PostType {
     public function register_post_type() {
         $labels = array(
             'name'                  => _x( 'WP Videos Grid', 'Post type general name', 'wp-video-grid' ),
-            'singular_name'         => _x( 'WP Video Grid', 'Post type singular name', 'wp-video-grid' ),
+            'singular_name'         => _x( 'WP Video', 'Post type singular name', 'wp-video-grid' ),
             'menu_name'             => _x( 'WP Videos Grid', 'Admin Menu text', 'wp-video-grid' ),
-            'name_admin_bar'        => _x( 'WP Video Grid', 'Add New on Toolbar', 'wp-video-grid' ),
+            'name_admin_bar'        => _x( 'WP Video', 'Add New on Toolbar', 'wp-video-grid' ),
             'add_new'               => __( 'Add New', 'wp-video-grid' ),
             'add_new_item'          => __( 'Add New Video', 'wp-video-grid' ),
             'new_item'              => __( 'New Video', 'wp-video-grid' ),
@@ -73,5 +74,19 @@ class PostType {
         );
 
         register_post_type( 'wp-video-grid', $args );
+    }
+
+    /**
+     * Disable Gutenberg for this post type
+     *
+     * @param bool   $current_status The current Gutenberg status for the post.
+     * @param string $post_type      The post type.
+     * @return bool
+     */
+    public function disable_gutenberg( $current_status, $post_type ) {
+        if ( 'wp-video-grid' === $post_type ) {
+            return false;
+        }
+        return $current_status;
     }
 }

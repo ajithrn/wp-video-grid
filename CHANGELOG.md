@@ -1,5 +1,14 @@
 # Changelog
 
+## [1.5.1] - 2024-07-30
+
+### Changed
+- Disabled block editor (Gutenberg) for WP Video Grid custom post type
+
+### Improved
+- Streamlined video management experience by using classic editor interface
+
+
 ## [1.5.0] - 2024-07-27
 
 ### Added
